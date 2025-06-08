@@ -11,7 +11,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message }) => {
   const isUser = message.sender === "user";
   
   // Check if message text indicates an error to style it differently
-  const isErrorMessage = message.sender === "bot" && message.text.toLowerCase().startsWith("error:");
+  const isErrorMessage = message.sender === "bot" && message.text?.toLowerCase().startsWith("error:");
   
   return (
     <div className={`flex items-end gap-3 animate-fadeIn ${isUser ? "justify-end" : "justify-start"}`}>

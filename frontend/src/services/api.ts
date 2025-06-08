@@ -5,7 +5,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8001";
 export const sendMessageToAssistant = async (
   text: string,
   openaiThreadId: string | null, // OpenAI's Thread ID
-  conversationDbId: number | null  // Your Supabase DB's conversation ID
+  conversationDbId: string | null,  // Your Supabase DB's conversation ID
+  token: string // Add token parameter
 ): Promise<ChatServiceResponse> => {
   
   const requestBody: ChatServiceRequest = {
@@ -23,10 +24,7 @@ export const sendMessageToAssistant = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Authentication token will be handled by Supabase client on the API route side
-        // For client-side calls to Next.js API routes that are protected,
-        // you'd typically fetch the session token and include it.
-        // Let's assume for now the API route /api/chat will handle auth.
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(requestBody),
     });
@@ -53,9 +51,9 @@ export const sendMessageToAssistant = async (
     const errorMessage = error instanceof Error ? error.message : "An unknown network error occurred.";
     // Return a structure that matches ChatServiceResponse for consistency in error handling
     return {
-        reply: `Error: Could not get a response. ${errorMessage}`,
+        result: `Error: Could not get a response. ${errorMessage}`,
         openai_thread_id: openaiThreadId || "", // Return current or empty thread_id on error
-        conversation_db_id: conversationDbId || 0, // Return current or 0/null on error
+        conversation_db_id: conversationDbId || "", // Return current or 0/null on error
         explanation: "Please check if the backend server is running or try again later."
     };
   }
@@ -102,6 +100,19 @@ export const fetchUserConversations = async (token: string): Promise<any[]> => {
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
     throw new Error(errorData.message || 'Failed to fetch conversations');
+  }
+  return response.json();
+};
+
+export const fetchConversationMessages = async (conversationId: number, token: string): Promise<any[]> => {
+  const response = await fetch(`${API_BASE_URL}/api/conversations/${conversationId}/messages`, {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || 'Failed to fetch conversation messages');
   }
   return response.json();
 };

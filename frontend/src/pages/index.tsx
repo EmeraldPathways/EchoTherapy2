@@ -10,7 +10,7 @@ const HomePage: React.FC = () => {
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
 
-/*
+  useEffect(() => {
     if (!loading && !user) {
       router.replace('/login'); // Redirect to login if not authenticated
     }
@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
         <div className="text-lg text-gray-700">Loading application...</div>
       </div>
     );
-  } */
+  }
 
   // User is authenticated, render the main app content
   return (

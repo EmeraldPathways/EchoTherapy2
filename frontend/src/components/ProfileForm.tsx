@@ -96,6 +96,19 @@ const ProfileForm: React.FC = () => {
         <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
           <h3 className="text-2xl font-semibold text-gray-800 mb-6">Personal Information</h3>
           <div className="space-y-5">
+            {/* Profile Picture/Avatar */}
+            <div className="mb-8">
+              <h4 className="text-xl font-semibold text-gray-700 mb-4">Profile Picture</h4>
+              <div className="flex items-center space-x-4">
+                <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl">
+                  {/* Placeholder for avatar, replace with actual image later */}
+                  <span>&#128100;</span>
+                </div>
+                <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                  Upload New Picture
+                </button>
+              </div>
+            </div>
             <div>
               <label htmlFor="email_display" className="block text-sm font-medium text-gray-700">Email</label>
               <input
@@ -150,6 +163,7 @@ const ProfileForm: React.FC = () => {
         </div>
 
         {/* Account Usage Card */}
+        {/*
         <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
           <h3 className="text-2xl font-semibold text-gray-800 mb-6">Account Usage</h3>
           <div className="space-y-5">
@@ -177,6 +191,7 @@ const ProfileForm: React.FC = () => {
             </div>
           </div>
         </div>
+        */}
 
         {error && <p className="text-sm text-red-600 text-center mt-4">{error}</p>}
         {message && <p className="text-sm text-green-600 text-center mt-4">{message}</p>}
