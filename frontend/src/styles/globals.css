@@ -1,0 +1,206 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+html, body, #__next {
+  height: 100%;
+  font-family: var(--font-family);
+  color: #1f2937;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-feature-settings: "rlig" 1, "calt" 1;
+  overscroll-behavior-y: none;
+  background: var(--gradient-hero);
+}
+
+/* Custom scrollbar for specific elements like the chat messages area */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(229, 231, 235, 0.4); /* Tailwind's gray-200 with opacity */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #6db3bd, #8bc4cd); /* teal blue gradient */
+  border-radius: 10px;
+  /* If you want a border around the thumb itself: */
+  /* border: 2px solid rgba(255, 255, 255, 0.2); */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #5a9ea8, #7ab5bf); /* darker teal blue on hover */
+}
+
+/* Firefox custom scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #6db3bd rgba(229, 231, 235, 0.4); /* thumb track (teal blue and gray-200/40) */
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fadeInUp { animation: fadeInUp 0.6s ease-out forwards; } /* 'forwards' keeps the end state */
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); } /* Slightly increased translateY */
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.4s ease-out forwards; } /* 'forwards' keeps the end state */
+
+@keyframes gradient-x {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
+
+/* Glassmorphism effect - enhanced for better appearance */
+.glass {
+  background: rgba(255, 255, 255, 0.75); /* Slightly more opaque for better content contrast */
+  backdrop-filter: blur(16px); /* Increased blur for better effect */
+  -webkit-backdrop-filter: blur(16px); /* Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Slightly more visible border */
+}
+
+/* Message bubble text formatting */
+.ai-message p { margin-bottom: 0.5rem; }
+.ai-message p:last-child { margin-bottom: 0; }
+
+.ai-message a {
+  color: #6366f1; /* indigo-500 */
+  text-decoration: underline;
+  text-underline-offset: 3px; /* Increased offset for clarity */
+  font-weight: 500; /* Changed from 500 to medium */
+  transition: all 0.2s ease;
+}
+.ai-message a:hover {
+  color: #4f46e5; /* indigo-600 */
+  text-decoration-thickness: 2px;
+}
+
+.ai-message code {
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875em; /* 14px if base is 16px */
+  padding: 0.2em 0.45em;
+  border-radius: 0.3rem; /* Slightly more rounded */
+  background-color: rgba(99, 102, 241, 0.12); /* indigo-500/12 */
+  color: #4338ca; /* indigo-700 */
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  display: inline-block; /* Helps with padding and background */
+}
+
+.ai-message pre {
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem; /* md */
+  background-color: #f8fafc; /* slate-50, good for code blocks */
+  overflow-x: auto;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.85em;
+  border: 1px solid rgba(203, 213, 225, 0.6); /* slate-300/60 */
+  box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.03);
+}
+/* Reset styles for code elements within pre blocks if necessary */
+.ai-message pre code {
+  background-color: transparent;
+  color: inherit; /* Or a specific color for code in pre */
+  padding: 0;
+  border: none;
+  font-size: inherit; /* Ensure it inherits pre's font size */
+  border-radius: 0;
+  display: inline; /* Reset from inline-block */
+}
+
+/* Glow effect for welcome icon (current is good, adjusted colors slightly) */
+.glow-effect {
+  box-shadow: 0 0 25px rgba(124, 58, 237, 0.45); /* purple-600 based */
+  animation: pulse-glow 2.8s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); } /* purple-600 */
+  50% { box-shadow: 0 0 35px rgba(168, 85, 247, 0.55); } /* purple-500 */
+  100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); } /* purple-600 */
+}
+
+/* Enhanced border class for better visibility */
+.border-3 {
+  border-width: 3px;
+}
+
+/* Enhanced message bubble animations */
+@keyframes message-slide-in {
+  from { 
+    opacity: 0; 
+    transform: translateY(15px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+.animate-message-slide-in { 
+  animation: message-slide-in 0.4s ease-out forwards; 
+}
+
+/* Enhanced hover effects for interactive elements */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Improved focus styles for accessibility */
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #6366f1, 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+/* Enhanced gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Enhanced textarea focus and hover effects */
+.message-input {
+  transition: all 0.2s ease;
+}
+
+.message-input:focus {
+  transform: translateY(-1px);
+  border-color: rgba(109, 179, 189, 0.7) !important;
+  box-shadow: 0 4px 12px rgba(109, 179, 189, 0.15), 0 0 0 3px rgba(109, 179, 189, 0.1) !important;
+}
+
+.message-input:hover:not(:focus) {
+  border-color: rgba(109, 179, 189, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Send button enhanced animations */
+.send-button {
+  position: relative;
+}
+
+.send-button:active {
+  transform: scale(0.95);
+}

@@ -1,0 +1,279 @@
+/* ===================================
+   CENTRALIZED DESIGN SYSTEM
+   ===================================
+   All colors, spacing, and design tokens in one place!
+   Change values here to update the entire app theme.
+*/
+
+:root {
+  /* === COLOR PALETTE === */
+  --color-primary: #6db3bd;
+  --color-primary-50: #f0f9fa;
+  --color-primary-100: #d4eff2;
+  --color-primary-200: #a9dfe5;
+  --color-primary-300: #7ecfd8;
+  --color-primary-400: #6db3bd;
+  --color-primary-500: #6db3bd;
+  --color-primary-600: #5a9ea8;
+  --color-primary-700: #478993;
+  --color-primary-800: #34747e;
+  --color-primary-900: #215f69;
+
+  --color-secondary: #bdc6ab;
+  --color-secondary-50: #f7f8f5;
+  --color-secondary-100: #eef1e6;
+  --color-secondary-200: #dde3cd;
+  --color-secondary-300: #ccd5b4;
+  --color-secondary-400: #bdc6ab;
+  --color-secondary-500: #bdc6ab;
+  --color-secondary-600: #a8b396;
+  --color-secondary-700: #939f81;
+  --color-secondary-800: #7e8b6c;
+  --color-secondary-900: #697757;
+
+  /* === GRADIENTS === */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-primary-300));
+  --gradient-secondary: linear-gradient(135deg, var(--color-secondary), var(--color-secondary-300));
+  --gradient-primary-to-secondary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  --gradient-hero: linear-gradient(135deg, var(--color-primary-100) 0%, var(--color-secondary-100) 100%);
+
+  /* === SHADOWS === */
+  --shadow-primary: 0 10px 25px -5px rgba(109, 179, 189, 0.25);
+  --shadow-secondary: 0 5px 15px -3px rgba(189, 198, 171, 0.2);
+  --shadow-glow: 0 0 20px rgba(109, 179, 189, 0.35);
+  --shadow-glow-hover: 0 0 35px rgba(109, 179, 189, 0.55);
+
+  /* === SPACING === */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* === BORDER RADIUS === */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* === TYPOGRAPHY === */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  --font-mono: 'Menlo', 'Monaco', 'Courier New', monospace;
+
+  /* === TRANSITIONS === */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* === Z-INDEX === */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+}
+
+/* ===================================
+   COMPONENT CLASSES
+   ===================================
+*/
+
+/* Buttons */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  border: none;
+  outline: none;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-primary);
+  outline: none;
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+  outline: none;
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: var(--shadow-primary);
+}
+
+/* Input fields */
+.input-primary {
+  border: 2px solid transparent;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  transition: all var(--transition-normal);
+}
+
+.input-primary:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(109, 179, 189, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 0;
+}
+
+/* Avatar */
+.avatar-bot {
+  background: var(--gradient-primary);
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.avatar-user {
+  background: var(--gradient-secondary);
+  color: var(--color-secondary-800);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* Message bubbles */
+.message-bubble-bot {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(109, 179, 189, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  max-width: 80%;
+}
+
+.message-bubble-user {
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--space-sm) var(--space-md);
+  max-width: 80%;
+  margin-left: auto;
+}
+
+/* Scrollbars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(229, 231, 235, 0.4);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, var(--color-primary-700), var(--color-primary-600));
+}
+
+/* Firefox scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) rgba(229, 231, 235, 0.4);
+}
+
+/* Loading animations */
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  animation: bounce 1.4s ease-in-out infinite both;
+}
+
+.loading-dot:nth-child(1) { animation-delay: -0.32s; }
+.loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { 
+    transform: scale(0);
+  } 
+  40% { 
+    transform: scale(1);
+  }
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: var(--shadow-glow);
+  animation: pulse-glow 2.8s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: var(--shadow-glow);
+  }
+  50% { 
+    box-shadow: var(--shadow-glow-hover);
+  }
+}
+
+/* Text styles */
+.text-gradient {
+  background: var(--gradient-primary-to-secondary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animate-fadeInUp { 
+  animation: fadeInUp 0.6s ease-out forwards; 
+}
+
+.animate-fadeIn { 
+  animation: fadeIn 0.4s ease-out forwards; 
+}

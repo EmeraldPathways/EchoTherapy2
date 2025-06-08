@@ -1,0 +1,81 @@
+import React, { useEffect } from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import ChatWindow from '@/components/ChatWindow';
+import { useAuth } from '@/components/AuthProvider';
+import Link from 'next/link'; // For navigation links
+import NavBar from '@/components/NavBar'; // Import the new NavBar component
+
+const HomePage: React.FC = () => {
+  const { user, loading, signOut } = useAuth();
+  const router = useRouter();
+
+/*
+    if (!loading && !user) {
+      router.replace('/login'); // Redirect to login if not authenticated
+    }
+  }, [user, loading, router]);
+
+  if (loading || !user) {
+    // Show loading indicator or null while checking auth state or redirecting
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-lg text-gray-700">Loading application...</div>
+      </div>
+    );
+  } */
+
+  // User is authenticated, render the main app content
+  return (
+    <>
+      <Head>
+        <title>AI Companion | Chat</title>
+        <meta
+          name="description"
+          content="Chat with your AI Mental Health Companion."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <div className="min-h-screen flex flex-col items-center bg-gray-100">
+        {/* Navigation Bar */}
+        <NavBar /> {/* Use the new NavBar component here */}
+
+        {/* Main Chat Area */}
+        <div className="flex-grow w-full flex flex-col items-center py-4 sm:py-8 px-2 sm:px-0">
+            {/* Header within the main content area, below nav */}
+            <header className="mb-4 sm:mb-6 text-center">
+                <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800">
+                    Chat with your AI Companion
+                </h1>
+                <p className="mt-2 text-sm sm:text-base text-gray-600">
+                    A safe space to explore your thoughts and feelings.
+                </p>
+            </header>
+
+            <main className="w-full max-w-3xl flex-grow flex flex-col">
+                <ChatWindow />
+            </main>
+        </div>
+
+
+        <footer className="w-full py-4 sm:py-6 text-center text-xs sm:text-sm text-gray-500 border-t border-gray-200">
+          <p className="font-semibold mb-1 sm:mb-2">
+            Disclaimer: Not a Substitute for Professional Advice
+          </p>
+          <p>
+            This AI tool is for supportive listening. It is{" "}
+            <strong className="text-red-600">not</strong> a replacement for
+            professional medical advice, diagnosis, or treatment.
+          </p>
+          <p className="mt-1">
+            If you are in crisis, please contact emergency services or a crisis hotline.
+          </p>
+        </footer>
+      </div>
+    </>
+  );
+};
+
+export default HomePage;
