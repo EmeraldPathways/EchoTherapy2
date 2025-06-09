@@ -5,6 +5,7 @@ import ChatWindow from '@/components/ChatWindow';
 import { useAuth } from '@/components/AuthProvider';
 import Link from 'next/link'; // For navigation links
 import NavBar from '@/components/NavBar'; // Import the new NavBar component
+import InteractiveDemo from '@/components/InteractiveDemo'; // Import the new component
 
 const HomePage: React.FC = () => {
   const { user, loading, signOut } = useAuth();
@@ -12,12 +13,12 @@ const HomePage: React.FC = () => {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.replace('/login'); // Redirect to login if not authenticated
+      // No longer redirecting to login, instead show demo
+      // router.replace('/login'); 
     }
   }, [user, loading, router]);
 
-  if (loading || !user) {
-    // Show loading indicator or null while checking auth state or redirecting
+  if (loading) { // Only check loading, not user for initial render
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-lg text-gray-700">Loading application...</div>
@@ -25,7 +26,6 @@ const HomePage: React.FC = () => {
     );
   }
 
-  // User is authenticated, render the main app content
   return (
     <>
       <Head>
@@ -38,24 +38,36 @@ const HomePage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen flex flex-col items-center bg-gray-100">
+      <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_60%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.1)_0%,_transparent_70%)] pointer-events-none"></div>
+
         {/* Navigation Bar */}
         <NavBar /> {/* Use the new NavBar component here */}
 
         {/* Main Chat Area */}
-        <div className="flex-grow w-full flex flex-col items-center py-4 sm:py-8 px-2 sm:px-0">
+        <div className="flex-grow w-full flex flex-col items-center py-4 sm:py-8 px-2 sm:px-0 animate-fade-in">
             {/* Header within the main content area, below nav */}
             <header className="mb-4 sm:mb-6 text-center">
-                <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-800">
-                    Chat with your AI Companion
-                </h1>
-                <p className="mt-2 text-sm sm:text-base text-gray-600">
-                    A safe space to explore your thoughts and feelings.
-                </p>
             </header>
 
             <main className="w-full max-w-3xl flex-grow flex flex-col">
-                <ChatWindow />
+                {user ? (
+                    <ChatWindow />
+                ) : (
+                    <div className="flex flex-col items-center w-full max-w-xl mx-auto">
+                        <InteractiveDemo />
+                        <div className="mt-8 text-center">
+                            <p className="text-md text-gray-700 mb-4">Ready for your personal AI companion?</p>
+                            <Link href="/signup" legacyBehavior>
+                                <a className="btn-primary px-8 py-3 shadow-lg text-lg">
+                                    Sign Up Now
+                                </a>
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </main>
         </div>
 

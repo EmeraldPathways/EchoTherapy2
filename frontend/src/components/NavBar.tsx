@@ -20,7 +20,7 @@ const NavBar: React.FC = () => {
           <div className="flex items-center">
             <Link href="/" legacyBehavior>
               <a className="font-bold text-xl text-blue-600 hover:text-blue-700">
-                AI Companion
+                ECHO
               </a>
             </Link>
           </div>

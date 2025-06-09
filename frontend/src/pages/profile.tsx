@@ -172,12 +172,15 @@ const ProfilePage: React.FC = () => {
                           ← Back to Conversation List
                         </button>
                       </div>
-                      <ChatWindow
-                        key={selectedConversation.dbId} // Force re-mount with new key
-                        initialConversationDbId={selectedConversation.dbId}
-                        initialOpenaiThreadId={selectedConversation.openaiThreadId}
-                        initialMessages={selectedConversation.messages}
-                      />
+                      {/* Display messages as plain text */}
+                      <div className="flex-grow overflow-y-auto p-4 border rounded-md bg-gray-50">
+                        {selectedConversation.messages.map((message, index) => (
+                          <div key={index} className={`mb-2 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}>
+                            <span className="font-semibold">{message.sender === 'user' ? 'You' : 'AI Companion'}: </span>
+                            <span>{message.text}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   ) : (
                     !isLoadingChat && <ConversationsList onSelectConversation={handleSelectConversation} />

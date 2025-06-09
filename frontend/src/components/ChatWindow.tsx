@@ -136,14 +136,14 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
         {/* Header background decoration */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/5"></div>
         <div className="relative z-10 text-center">
-          <h3 className="font-bold text-xl tracking-wide mb-1 text-gray-600">AI Companion</h3>
-          <p className="text-gray-500 text-sm">Ready to assist you</p>
+          <h3 className="font-bold text-xl tracking-wide mb-1 text-gradient">ECHO</h3>
+          <p className="text-gray-500 text-sm">Navigating your thoughts with a caring AI companion</p>
         </div>
       </div>
       {/* Messages Area */}
       <div 
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto p-1 space-y-3 bg-gradient-to-b from-primary/5 to-white/95 custom-scrollbar"
+        className="flex-1 overflow-y-auto px-4 py-1 space-y-3 bg-gradient-to-b from-primary/5 to-white/95 custom-scrollbar"
       >
         {messages.length === 0 && !isLoading && (
           <div className="text-center text-gray-500 flex flex-col items-center justify-center h-full animate-fadeInUp">
@@ -154,7 +154,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
               Welcome!
             </p>
             <p className="text-gray-600 text-base max-w-sm px-4">
-              Type a message below to start chatting with your AI Companion.
+              Type a message to start talking with Echo
             </p>
           </div>
         )}
@@ -173,7 +173,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
               <div className="loading-dot" style={{ animationDelay: "300ms" }}></div>
             </div>
             <span className="text-sm ml-3 font-medium text-gradient">
-              AI is thinking...
+              ECHO is thinking...
             </span>
           </div>
         </div>
@@ -181,6 +181,15 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
       
       {/* Message Input */}
       <MessageInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+      
+      {/* Disclaimer Footer */}
+      <div className="bg-gradient-to-r from-primary to-secondary p-4 rounded-b-xl shadow-lg relative overflow-hidden flex-shrink-0">
+        {/* Footer background decoration */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/5"></div>
+        <div className="relative z-10 text-center">
+          <p className="text-gray-500 text-sm">DISCLAIMER: I am not a therapist & cannot provide medical advice or crisis support. If you are in crisis, contact emergency services or a <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">crisis hotline</a>.</p>
+        </div>
+      </div>
     </div>
   );
 };
