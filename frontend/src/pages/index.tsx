@@ -38,7 +38,7 @@ const HomePage: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden">
+      <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden pt-24">
         {/* Decorative background elements */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_60%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.1)_0%,_transparent_70%)] pointer-events-none"></div>
@@ -47,43 +47,43 @@ const HomePage: React.FC = () => {
         <NavBar /> {/* Use the new NavBar component here */}
 
         {/* Main Chat Area */}
-        <div className="flex-grow w-full flex flex-col items-center py-4 sm:py-8 px-2 sm:px-0 animate-fade-in">
+        <div className="flex-grow w-full flex flex-col items-center py-4 sm:py-16 px-2 sm:px-0 animate-fade-in">
             {/* Header within the main content area, below nav */}
             <header className="mb-4 sm:mb-6 text-center">
             </header>
 
-            <main className="w-full max-w-3xl flex-grow flex flex-col">
+            <main className="w-full max-w-3xl flex-grow flex flex-col mb-8">
                 {user ? (
                     <ChatWindow />
                 ) : (
                     <div className="flex flex-col items-center w-full max-w-xl mx-auto">
                         <InteractiveDemo />
-                        <div className="mt-8 text-center">
-                            <p className="text-md text-gray-700 mb-4">Ready for your personal AI companion?</p>
-                            <Link href="/signup" legacyBehavior>
-                                <a className="btn-primary px-8 py-3 shadow-lg text-lg">
-                                    Sign Up Now
-                                </a>
-                            </Link>
-                        </div>
                     </div>
                 )}
             </main>
         </div>
 
 
-        <footer className="w-full py-4 sm:py-6 text-center text-xs sm:text-sm text-gray-500 border-t border-gray-200">
-          <p className="font-semibold mb-1 sm:mb-2">
-            Disclaimer: Not a Substitute for Professional Advice
-          </p>
-          <p>
-            This AI tool is for supportive listening. It is{" "}
-            <strong className="text-red-600">not</strong> a replacement for
-            professional medical advice, diagnosis, or treatment.
-          </p>
-          <p className="mt-1">
-            If you are in crisis, please contact emergency services or a crisis hotline.
-          </p>
+        <footer className="w-full py-6 sm:py-8 bg-gray-100 text-center text-xs sm:text-sm text-gray-600 border-t border-gray-200">
+          <div className="max-w-3xl mx-auto px-4">
+            <p className="font-medium mb-2">
+              Disclaimer: This AI tool is for supportive listening only. It is not a replacement for professional medical advice, diagnosis, or treatment.
+            </p>
+            <p className="mb-3">
+              If you are in crisis, please contact emergency services or a crisis hotline.
+            </p>
+            <div className="flex justify-center space-x-6 mb-3">
+              <Link href="/privacy-policy" className="text-blue-700 hover:underline">
+                Privacy Policy
+              </Link>
+              <Link href="/cookie-policy" className="text-blue-700 hover:underline">
+                Cookie Policy
+              </Link>
+            </div>
+            <p className="text-gray-500">
+              &copy; {new Date().getFullYear()} EchoTherapy. All rights reserved.
+            </p>
+          </div>
         </footer>
       </div>
     </>

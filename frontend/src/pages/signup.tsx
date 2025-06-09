@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAuth } from '@/components/AuthProvider'
+import NavBar from '@/components/NavBar'
 
 export default function Signup() {
   const [email, setEmail] = useState('')
@@ -25,7 +26,10 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden pt-32">
+      <NavBar />
+      <div className="h-16 w-full"></div> {/* Spacer div to clear the fixed NavBar */}
+      {/* Decorative background elements */}
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import NavBar from '@/components/NavBar';
 
 const ContactPage = () => {
   return (
@@ -9,11 +10,17 @@ const ContactPage = () => {
         <meta name="description" content="Contact the AI Companion team" />
       </Head>
 
-      <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Contact Us</h1>
+      <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden pt-32">
+        <NavBar />
+        <div className="h-16 w-full"></div> {/* Spacer div to clear the fixed NavBar */}
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_60%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.1)_0%,_transparent_70%)] pointer-events-none"></div>
+
+        <main className="flex-grow flex flex-col items-center w-full max-w-3xl px-4 sm:px-0 animate-fade-in text-gray-800">
+          <h1 className="text-4xl sm:text-5xl font-bold text-center mb-8 text-primary-700">Contact Us</h1>
           
-          <div className="bg-white shadow rounded-lg p-6">
+          <section className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full">
             <p className="text-gray-600 mb-4">
               Have questions or feedback? We'd love to hear from you.
             </p>
@@ -29,11 +36,11 @@ const ContactPage = () => {
                 <p className="text-gray-600">Monday - Friday: 9am - 5pm EST</p>
               </div>
             </div>
-          </div>
-        </div>
+          </section>
+        </main>
       </div>
     </>
   );
 };
 
-export default ContactPage; 
+export default ContactPage;
