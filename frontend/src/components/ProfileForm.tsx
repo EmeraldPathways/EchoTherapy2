@@ -9,6 +9,7 @@ const ProfileForm: React.FC = () => {
   const [gender, setGender] = useState<UserProfile['gender']>(undefined);
   const [location, setLocation] = useState<string>('');
   const [messageCount, setMessageCount] = useState<number>(0);
+  const [profilePictureUrl, setProfilePictureUrl] = useState<string | null>(null);
   // Add other profile fields here if needed:
   // const [age, setAge] = useState<number | ''>('');
   // const [interests, setInterests] = useState<string[]>([]);
@@ -25,8 +26,8 @@ const ProfileForm: React.FC = () => {
       setError(null);
       try {
         const { data, error: fetchError } = await supabase
-          .from('users')
-          .select('name, gender, location, message_count')
+          .from('profiles')
+          .select('name, gender, location, message_count, profile_picture_url')
           .eq('id', user.id)
           .single();
 
@@ -38,6 +39,7 @@ const ProfileForm: React.FC = () => {
           setGender(data.gender || undefined);
           setLocation(data.location || '');
           setMessageCount(data.message_count || 0);
+          setProfilePictureUrl(data.profile_picture_url || null);
         }
       } catch (err: any) {
         console.error("Error fetching profile:", err);
@@ -65,14 +67,16 @@ const ProfileForm: React.FC = () => {
         name: name,
         gender: gender,
         location: location,
+        profile_picture_url: profilePictureUrl,
       };
 
       const { error: updateError } = await supabase
-        .from('users')
+        .from('profiles')
         .update(updates)
         .eq('id', user.id);
 
       if (updateError) {
+        console.error("Supabase Update Error:", updateError);
         throw updateError;
       }
       setMessage('Profile updated successfully!');
@@ -84,81 +88,98 @@ const ProfileForm: React.FC = () => {
     }
   };
 
+  const handleProfilePictureUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfilePictureUrl(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
   if (loading && !name) { // Show loading only if profile data hasn't been fetched yet
     return <div className="text-center p-4">Loading profile...</div>;
   }
 
   return (
-    <div className="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-lg mx-auto">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Your Profile</h2>
+    <div className="w-full max-w-lg space-y-6 mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Personal Information Card */}
-        <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Personal Information</h3>
-          <div className="space-y-5">
-            {/* Profile Picture/Avatar */}
-            <div className="mb-8">
-              <h4 className="text-xl font-semibold text-gray-700 mb-4">Profile Picture</h4>
-              <div className="flex items-center space-x-4">
-                <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl">
-                  {/* Placeholder for avatar, replace with actual image later */}
+        <div className="space-y-5">
+          {/* Profile Picture/Avatar */}
+          <div className="mb-8">
+            <h4 className="text-xl font-semibold text-gray-700 mb-4"></h4>
+            <div className="flex items-center space-x-4">
+              <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-4xl overflow-hidden">
+                {profilePictureUrl ? (
+                  <img src={profilePictureUrl} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
                   <span>&#128100;</span>
-                </div>
-                <button className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                  Upload New Picture
-                </button>
+                )}
               </div>
+              <label htmlFor="profile-picture-upload" className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 cursor-pointer">
+                Upload New Picture
+                <input
+                  id="profile-picture-upload"
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={handleProfilePictureUpload}
+                  disabled={loading}
+                />
+              </label>
             </div>
-            <div>
-              <label htmlFor="email_display" className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                id="email_display"
-                type="email"
-                value={user?.email || ''}
-                disabled
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 sm:text-base cursor-not-allowed"
-              />
-            </div>
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-              <input
-                id="name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
-                placeholder="Your Name"
-                disabled={loading}
-              />
-            </div>
-            <div>
-              <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
-              <select
-                id="gender"
-                value={gender || ''}
-                onChange={(e) => setGender(e.target.value as UserProfile['gender'])}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
-                disabled={loading}
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-                <option value="Prefer not to say">Prefer not to say</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
-              <input
-                id="location"
-                type="text"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
-                placeholder="Your Location"
-                disabled={loading}
-              />
-            </div>
+          </div>
+          <div>
+            <label htmlFor="email_display" className="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              id="email_display"
+              type="email"
+              value={user?.email || ''}
+              disabled
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 sm:text-base cursor-not-allowed"
+            />
+          </div>
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
+              placeholder="Your Name"
+              disabled={loading}
+            />
+          </div>
+          <div>
+            <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
+            <select
+              id="gender"
+              value={gender || ''}
+              onChange={(e) => setGender(e.target.value as UserProfile['gender'])}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
+              disabled={loading}
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+              <option value="Prefer not to say">Prefer not to say</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="location" className="block text-sm font-medium text-gray-700">Location</label>
+            <input
+              id="location"
+              type="text"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent sm:text-base"
+              placeholder="Your Location"
+              disabled={loading}
+            />
           </div>
         </div>
 

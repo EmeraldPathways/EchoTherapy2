@@ -67,11 +67,10 @@ const ConversationsList: React.FC<ConversationsListProps> = ({ onSelectConversat
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-6 space-y-4">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Your Past Conversations</h2>
+    <div className="w-full max-w-2xl mx-auto space-y-4">
       <ul className="divide-y divide-gray-200">
         {conversations.map((convo) => (
-          <li key={convo.id} className="py-4">
+          <li key={convo.id} className="py-2">
             <button
               onClick={() => handleConversationClick(convo)}
               className="w-full text-left p-3 rounded-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition-colors"

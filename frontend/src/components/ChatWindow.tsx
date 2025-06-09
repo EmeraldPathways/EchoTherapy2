@@ -136,7 +136,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
         {/* Header background decoration */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/5"></div>
         <div className="relative z-10 text-center">
-          <h3 className="font-bold text-xl tracking-wide mb-1 text-gradient">ECHO</h3>
+          <img src="/icons/Echo Logo.png" alt="Echo Therapy Logo" className="h-10 w-auto mx-auto mb-0" />
           <p className="text-gray-500 text-sm">Navigating your thoughts with a caring AI companion</p>
         </div>
       </div>
@@ -147,14 +147,10 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
       >
         {messages.length === 0 && !isLoading && (
           <div className="text-center text-gray-500 flex flex-col items-center justify-center h-full animate-fadeInUp">
-            <div className="mb-4 bg-gradient-to-br from-primary to-secondary w-20 h-20 rounded-full flex items-center justify-center shadow-xl glow-primary border-2 border-white/70">
-              <span className="text-white text-3xl">✨</span>
+            <div className="mb-4 bg-gradient-to-br from-primary/5 to-white/95 w-20 h-20 rounded-full flex items-center justify-center shadow-xl glow-primary border-2 border-white/70">
             </div>
             <p className="text-2xl font-semibold mb-2 text-gradient">
               Welcome!
-            </p>
-            <p className="text-gray-600 text-base max-w-sm px-4">
-              Type a message to start talking with Echo
             </p>
           </div>
         )}

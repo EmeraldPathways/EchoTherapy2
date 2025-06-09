@@ -43,8 +43,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { data, error } = await supabase.auth.signUp({ email, password });
     if (error) throw error;
+
+    // If signup is successful, create a corresponding entry in public.users
+    if (data.user) {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({ id: data.user.id, email: data.user.email });
+
+      if (profileError) {
+        console.error("Error creating user profile in public.users:", profileError);
+        // Optionally, you might want to handle this more gracefully, e.g., rollback user creation
+        // or inform the user that profile creation failed.
+        throw profileError; // Re-throw to indicate a problem with the overall signup process
+      }
+    }
   };
 
   const signOut = async () => {

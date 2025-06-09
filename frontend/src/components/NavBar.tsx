@@ -22,7 +22,7 @@ const NavBar: React.FC = () => {
           <div className="flex items-center">
             <Link href="/" legacyBehavior>
               <a className="font-bold text-xl text-blue-600 hover:text-blue-700">
-                ECHO
+                <img src="/icons/Echo Logo.png" alt="Echo Therapy Logo" className="h-16 w-auto" />
               </a>
             </Link>
           </div>
@@ -84,13 +84,6 @@ const NavBar: React.FC = () => {
                     About Us
                   </a>
                 </Link>
-                <Link href="/terms-of-service" legacyBehavior>
-                  <a onClick={() => setIsOpen(false)} className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    router.pathname === '/terms-of-service' ? 'text-blue-700 bg-blue-50' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
-                  }`}>
-                    Terms of Service
-                  </a>
-                </Link>
                 <Link href="/faq" legacyBehavior>
                   <a onClick={() => setIsOpen(false)} className={`block px-3 py-2 rounded-md text-base font-medium ${
                     router.pathname === '/faq' ? 'text-blue-700 bg-blue-50' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
@@ -120,13 +113,6 @@ const NavBar: React.FC = () => {
                       router.pathname === '/about-us' ? 'text-blue-700 bg-blue-50' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
                     }`}>
                       About Us
-                    </a>
-                  </Link>
-                  <Link href="/terms-of-service" legacyBehavior>
-                    <a onClick={() => setIsOpen(false)} className={`block px-3 py-2 rounded-md text-base font-medium ${
-                      router.pathname === '/terms-of-service' ? 'text-blue-700 bg-blue-50' : 'text-gray-900 hover:bg-gray-50 hover:text-gray-900'
-                    }`}>
-                      Terms of Service
                     </a>
                   </Link>
                   <Link href="/faq" legacyBehavior>

@@ -83,7 +83,7 @@ const InteractiveDemo: React.FC = () => {
         {/* Header background decoration */}
         <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/5"></div>
         <div className="relative z-10 text-center">
-          <h3 className="font-bold text-xl tracking-wide mb-1 text-gradient">ECHO</h3>
+          <img src="/icons/Echo Logo.png" alt="Echo Therapy Logo" className="h-10 w-auto mx-auto mb-0" />
           <p className="text-gray-500 text-sm">Navigating your thoughts with a caring AI companion</p>
         </div>
       </div>

@@ -15,7 +15,7 @@ const ProfilePage: React.FC = () => {
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
 
-  const [activeTab, setActiveTab] = useState<'personalInfo' | 'accountUsage' | 'conversationHistory' | 'accountSettings'>('personalInfo');
+  const [activeTab, setActiveTab] = useState<'personalInfo' | 'conversationHistory' | 'account'>('personalInfo');
 
   const [selectedConversation, setSelectedConversation] = useState<{
     dbId: number | null;
@@ -93,7 +93,7 @@ const ProfilePage: React.FC = () => {
         <title>Your Profile | AI Companion</title>
         <meta name="description" content="Manage your AI Companion profile." />
       </Head>
-      <div className="min-h-screen flex flex-col items-center bg-gray-100">
+      <div className="min-h-screen flex flex-col items-center bg-gray-100 pt-16">
         {/* Navigation Bar (same as index.tsx) */}
         <NavBar />
 
@@ -108,22 +108,16 @@ const ProfilePage: React.FC = () => {
                 Personal Information
               </button>
               <button
-                className={`py-2 px-4 text-sm font-medium ${activeTab === 'accountUsage' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                onClick={() => setActiveTab('accountUsage')}
-              >
-                Account Usage
-              </button>
-              <button
                 className={`py-2 px-4 text-sm font-medium ${activeTab === 'conversationHistory' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
                 onClick={() => setActiveTab('conversationHistory')}
               >
                 Conversation History
               </button>
               <button
-                className={`py-2 px-4 text-sm font-medium ${activeTab === 'accountSettings' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
-                onClick={() => setActiveTab('accountSettings')}
+                className={`py-2 px-4 text-sm font-medium ${activeTab === 'account' ? 'border-b-2 border-blue-500 text-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+                onClick={() => setActiveTab('account')}
               >
-                Account Settings
+                Account
               </button>
             </div>
 
@@ -131,31 +125,59 @@ const ProfilePage: React.FC = () => {
             <div className="mt-8">
               {activeTab === 'personalInfo' && (
                 <div className="bg-white p-6 rounded-lg shadow">
-                  <h2 className="text-2xl font-semibold text-gray-700 mb-4">Personal Information</h2>
                   <ProfileForm />
                 </div>
               )}
 
-              {activeTab === 'accountUsage' && (
-                <div className="bg-white p-6 rounded-lg shadow">
-                  <h2 className="text-2xl font-semibold text-gray-700 mb-4">Account Usage</h2>
-                  <div className="space-y-4">
-                    <p className="text-lg text-gray-700">
-                      Messages left: <span className="font-bold text-blue-600">0</span>
-                    </p>
-                    <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-                      Buy More Messages
-                    </button>
-                    <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 ml-4">
-                      Cancel Subscription
-                    </button>
+              {activeTab === 'account' && (
+                <div className="bg-white p-6 rounded-lg shadow space-y-8">
+                  {/* Account Usage Section */}
+                  <div>
+                    <h2 className="text-2xl font-semibold text-gray-700 mb-4">Account Usage</h2>
+                    <div className="space-y-4">
+                      <p className="text-lg text-gray-700">
+                        Messages left: <span className="font-bold text-blue-600">0</span>
+                      </p>
+                      <button className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                        Buy More Messages
+                      </button>
+                      <button className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 ml-4">
+                        Cancel Subscription
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Account Settings Section */}
+                  <div>
+                    <h2 className="text-2xl font-semibold text-gray-700 mb-4">Account Settings</h2>
+                    <ul className="space-y-4">
+                      <li>
+                        <Link href="/help" className="text-blue-600 hover:underline">
+                          Help & FAQ
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/terms" className="text-blue-600 hover:underline">
+                          Terms of Service
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/privacy" className="text-blue-600 hover:underline">
+                          Privacy Policy
+                        </Link>
+                      </li>
+                      <li>
+                        <button className="text-red-600 hover:underline focus:outline-none">
+                          Delete Account
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               )}
 
               {activeTab === 'conversationHistory' && (
                 <div className="bg-white p-6 rounded-lg shadow">
-                  <h2 className="text-2xl font-semibold text-gray-700 mb-4">Conversation History</h2>
                   {isLoadingChat && (
                     <div className="text-center p-10 text-gray-600">Loading chat messages...</div>
                   )}
@@ -185,34 +207,6 @@ const ProfilePage: React.FC = () => {
                   ) : (
                     !isLoadingChat && <ConversationsList onSelectConversation={handleSelectConversation} />
                   )}
-                </div>
-              )}
-
-              {activeTab === 'accountSettings' && (
-                <div className="bg-white p-6 rounded-lg shadow">
-                  <h2 className="text-2xl font-semibold text-gray-700 mb-4">Account Settings</h2>
-                  <ul className="space-y-4">
-                    <li>
-                      <Link href="/help" className="text-blue-600 hover:underline">
-                        Help & FAQ
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/terms" className="text-blue-600 hover:underline">
-                        Terms of Service
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/privacy" className="text-blue-600 hover:underline">
-                        Privacy Policy
-                      </Link>
-                    </li>
-                    <li>
-                      <button className="text-red-600 hover:underline focus:outline-none">
-                        Delete Account
-                      </button>
-                    </li>
-                  </ul>
                 </div>
               )}
             </div>

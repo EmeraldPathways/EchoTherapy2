@@ -73,7 +73,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type your message here..."
+            placeholder="Type a message to start talking with Echo"
             disabled={isLoading}
             aria-label="Chat message input"
             maxLength={1000}
@@ -94,10 +94,6 @@ const MessageInput: React.FC<MessageInputProps> = ({
           disabled={isLoading || !input.trim()}
           hasInput={!!input.trim()}
         />
-      </div>
-      
-      <div className="mt-2.5 text-xs text-gray-500/90 text-center font-medium">
-        Press <span className="px-1.5 py-0.5 bg-primary/10 text-primary-700 rounded font-semibold">Enter</span> to send • <span className="px-1.5 py-0.5 bg-primary/10 text-primary-700 rounded font-semibold">Shift + Enter</span> for new line
       </div>
     </form>
   );

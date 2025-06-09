@@ -51,6 +51,9 @@ const AboutUs: React.FC = () => {
               <Link href="/cookie-policy" className="text-blue-700 hover:underline">
                 Cookie Policy
               </Link>
+              <Link href="/terms-of-service" className="text-blue-700 hover:underline">
+                Terms of Service
+              </Link>
             </div>
             <p className="text-gray-500">
               &copy; {new Date().getFullYear()} EchoTherapy. All rights reserved.

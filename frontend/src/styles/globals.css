@@ -121,14 +121,10 @@ body {
 }
 
 /* Glow effect for welcome icon (current is good, adjusted colors slightly) */
-.glow-effect {
-  box-shadow: 0 0 25px rgba(124, 58, 237, 0.45); /* purple-600 based */
-  animation: pulse-glow 2.8s ease-in-out infinite;
-}
 @keyframes pulse-glow {
-  0% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); } /* purple-600 */
-  50% { box-shadow: 0 0 35px rgba(168, 85, 247, 0.55); } /* purple-500 */
-  100% { box-shadow: 0 0 20px rgba(124, 58, 237, 0.35); } /* purple-600 */
+  0% { box-shadow: 0 0 20px rgba(0, 128, 128, 0.35); } /* Teal green */
+  50% { box-shadow: 0 0 35px rgba(0, 128, 128, 0.55); } /* Teal green */
+  100% { box-shadow: 0 0 20px rgba(0, 128, 128, 0.35); } /* Teal green */
 }
 
 /* Enhanced border class for better visibility */

@@ -19,6 +19,8 @@
   --color-primary-800: #34747e;
   --color-primary-900: #215f69;
 
+  --color-teal-green: #008080;
+
   --color-secondary: #bdc6ab;
   --color-secondary-50: #f7f8f5;
   --color-secondary-100: #eef1e6;
@@ -40,8 +42,8 @@
   /* === SHADOWS === */
   --shadow-primary: 0 10px 25px -5px rgba(109, 179, 189, 0.25);
   --shadow-secondary: 0 5px 15px -3px rgba(189, 198, 171, 0.2);
-  --shadow-glow: 0 0 20px rgba(109, 179, 189, 0.35);
-  --shadow-glow-hover: 0 0 35px rgba(109, 179, 189, 0.55);
+  --shadow-glow: 0 0 20px rgba(0, 128, 128, 0.35);
+  --shadow-glow-hover: 0 0 35px rgba(0, 128, 128, 0.55);
 
   /* === SPACING === */
   --space-xs: 0.25rem;

@@ -29,8 +29,10 @@ export default function Signup() {
     <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden pt-32">
       <NavBar />
       <div className="h-16 w-full"></div> {/* Spacer div to clear the fixed NavBar */}
-      {/* Decorative background elements */}
-      <div className="max-w-md w-full space-y-8">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_60%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.1)_0%,_transparent_70%)] pointer-events-none"></div>
+
+      <div className="max-w-md w-full space-y-8 z-10 p-8 bg-white rounded-lg shadow-lg">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
             Create your account

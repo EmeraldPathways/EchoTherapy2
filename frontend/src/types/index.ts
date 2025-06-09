@@ -19,6 +19,7 @@ export interface UserProfile {
   gender?: 'Male' | 'Female' | 'Other' | 'Prefer not to say';
   location?: string;
   message_count?: number;
+  profile_picture_url?: string | null; // Allow null for profile picture URL
   // Add other fields as needed
 }
 
