@@ -138,7 +138,7 @@ export default async function handler(
 
     // 6. Create and Run Assistant
     let run = await openai.beta.threads.runs.create(currentOpenAIThreadId!, { // Assert non-null
-      assistant_id: assistantId,
+      assistant_id: assistantId!, // Added non-null assertion here
       // Instructions are set on the Assistant object in OpenAI dashboard.
       // You can override or add metadata here if needed:
       // metadata: { user_db_id: authenticatedUser.id, conversation_db_id: currentConversationDbId }
