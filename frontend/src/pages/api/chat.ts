@@ -20,7 +20,7 @@ if (!supabaseUrl || !supabaseServiceRoleKey || !openAIApiKey || !assistantId) {
 const supabaseAdmin: SupabaseClient = createClient(supabaseUrl, supabaseServiceRoleKey);
 const openai: OpenAI = new OpenAI({ apiKey: openAIApiKey });
 
-// --- Placeholder for Trusted Data Source & Function Implementation ---
+// --- Placeholder for Trusted Data Source & Function Implementation ---\
 const TRUSTED_KNOWLEDGE_BASE = {
     "stress": {
         "definition": "Stress is a feeling of emotional or physical tension. It can come from any event or thought that makes you feel frustrated, angry, or nervous. Stress is your body's reaction to a challenge or demand.",
@@ -213,7 +213,7 @@ export default async function handler(
 
     // 10. Send Response to Frontend
     return res.status(200).json({
-      reply: assistantReply,
+      result: assistantReply, // Changed 'reply' to 'result'
       openai_thread_id: currentOpenAIThreadId!, // Assert non-null
       conversation_db_id: String(currentConversationDbId!), // Convert to string here
       explanation: "Response from AI Companion." 
