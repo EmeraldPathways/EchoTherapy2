@@ -1,10 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
-import dynamic from 'next/dynamic'; // ADD THIS LINE
+import dynamic from 'next/dynamic'; // Import dynamic for client-side rendering
 
-// Dynamically import NavBar with ssr: false
-const NavBar = dynamic(() => import('@/components/NavBar'), { ssr: false });
+const NavBar = dynamic(() => import('@/components/NavBar'), { ssr: false }); // Dynamically import NavBar
 
 const ContactPage = () => {
   return (
