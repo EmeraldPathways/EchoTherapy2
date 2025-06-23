@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import type { ChatServiceResponse, ChatServiceRequest, StoredMessage } from '@/types';
+import type { ChatServiceResponse, ChatServiceRequest } from '@/types'; // Removed StoredMessage
 import type { User } from '@supabase/supabase-js';
 import { json } from 'stream/consumers'; // Not typically needed here, ensure it's not a typo
 
