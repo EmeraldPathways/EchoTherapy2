@@ -27,7 +27,7 @@ const PrivacyPolicy: React.FC = () => {
           <section className="bg-white p-6 rounded-lg shadow-lg max-w-2xl w-full">
             <h2 className="text-2xl font-semibold mb-4 text-primary-600">Introduction</h2>
             <p className="mb-4">
-              Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our services.
+              Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and our services.
             </p>
             <h2 className="text-2xl font-semibold mb-4 text-primary-600">Information We Collect</h2>
             <p className="mb-4">
