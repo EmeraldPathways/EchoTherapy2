@@ -106,7 +106,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
         setCurrentThreadId(assistantResponse.openai_thread_id);
       }
       if (assistantResponse.conversation_db_id) { // Use conversation_db_id from response
-        setCurrentConversationDbId(assistantResponse.conversation_db_id);
+        setCurrentConversationDbId(Number(assistantResponse.conversation_db_id)); // Convert string to number
       }
 
       const newBotMessage: Message = {
