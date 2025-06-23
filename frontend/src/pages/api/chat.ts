@@ -215,7 +215,7 @@ export default async function handler(
     return res.status(200).json({
       reply: assistantReply,
       openai_thread_id: currentOpenAIThreadId!, // Assert non-null
-      conversation_db_id: currentConversationDbId!, // Assert non-null
+      conversation_db_id: String(currentConversationDbId!), // Convert to string here
       explanation: "Response from AI Companion." 
     });
 
