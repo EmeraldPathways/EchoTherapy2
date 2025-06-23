@@ -176,7 +176,7 @@ export default async function handler(
           }
           
           if (toolOutputs.length > 0) {
-            await openai.beta.threads.runs.submit_tool_outputs(currentOpenAIThreadId!, run.id, {
+            await openai.beta.threads.runs.submitToolOutputs(currentOpenAIThreadId!, run.id, { // Changed submit_tool_outputs to submitToolOutputs
               tool_outputs: toolOutputs,
             });
           }
