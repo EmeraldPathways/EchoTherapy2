@@ -20,6 +20,7 @@ export interface UserProfile {
   location?: string;
   message_count?: number;
   profile_picture_url?: string | null; // Allow null for profile picture URL
+  updated_at?: string; // ADDED THIS LINE for the last updated timestamp
   // Add other fields as needed
 }
 
