@@ -39,7 +39,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
     // When initial messages or thread ID change, update state
     if (initialConversationDbId !== null && initialConversationDbId !== undefined) {
       // Only update state if loading a specific past conversation
-      // This prevents resetting state for new conversations that don't pass these props
+      // This prevents resetting state for new conversations that don\'t pass these props
       setMessages(initialMessages || []);
       setCurrentThreadId(initialOpenaiThreadId || null);
       setCurrentConversationDbId(initialConversationDbId);
@@ -95,7 +95,12 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
     setIsLoading(true);
 
     try {
-      const assistantResponse = await sendMessageToAssistant(text, currentThreadId, currentConversationDbId, session.access_token);
+      const assistantResponse = await sendMessageToAssistant(
+        text,
+        currentThreadId,
+        currentConversationDbId !== null ? String(currentConversationDbId) : null, // Convert number to string
+        session.access_token
+      );
 
       if (assistantResponse.openai_thread_id) { // Use openai_thread_id from response
         setCurrentThreadId(assistantResponse.openai_thread_id);
@@ -141,7 +146,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
         </div>
       </div>
       {/* Messages Area */}
-      <div 
+      <div
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto px-4 py-1 space-y-3 bg-gradient-to-b from-primary/5 to-white/95 custom-scrollbar"
       >
@@ -174,10 +179,10 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ initialConversationDbId, initia
           </div>
         </div>
       )}
-      
+
       {/* Message Input */}
       <MessageInput onSendMessage={handleSendMessage} isLoading={isLoading} />
-      
+
       {/* Disclaimer Footer */}
       <div className="bg-gradient-to-r from-primary to-secondary p-4 rounded-b-xl shadow-lg relative overflow-hidden flex-shrink-0">
         {/* Footer background decoration */}
