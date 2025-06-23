@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-// import NavBar from '@/components/NavBar'; // REMOVE THIS LINE
 import dynamic from 'next/dynamic'; // ADD THIS LINE
 
 // Dynamically import NavBar with ssr: false
@@ -19,8 +18,8 @@ const FAQ: React.FC = () => {
 
       <div className="min-h-screen flex flex-col items-center bg-secondary-50 relative overflow-hidden pt-24">
         <NavBar />
-        {/* Decorative background elements */}\
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_60%)] pointer-events-none"></div>\
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.12)_0%,_transparent_60%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(255,255,255,0.1)_0%,_transparent_70%)] pointer-events-none"></div>
 
         <main className="flex-grow w-full max-w-3xl flex flex-col items-center py-4 sm:py-16 px-4 sm:px-0 animate-fade-in text-gray-800">
