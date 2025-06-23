@@ -1,10 +1,10 @@
-// import type { NextApiRequest, NextApiResponse } from 'next'; // REMOVED THIS LINE
+import type { NextApiRequest, NextApiResponse } from 'next'; // RE-ADDED THIS LINE
 import { createClient } from '@supabase/supabase-js';
 import type { Conversation } from '@/types'; // Your defined types
 
-// Note: NextApiRequest and NextApiResponse are typically globally available in Next.js API routes
-// If you encounter 'any' type issues after this change, you might need to
-// add them back but ensure your tsconfig.json is configured to avoid conflicts.
+// Note: NextApiRequest and NextApiResponse are now explicitly imported.
+// The 'json' import from 'stream/consumers' was commented out earlier as "Not typically needed here, ensure it's not a typo".
+// For now, we will leave it out as it was explicitly mentioned as not needed.
 
 const supabaseUrl: string | undefined = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseServiceRoleKey: string | undefined = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -17,8 +17,8 @@ if (!supabaseUrl || !supabaseServiceRoleKey) {
 const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey);
 
 export default async function handler(
-  req: NextApiRequest, // These types should be globally available
-  res: NextApiResponse<Conversation[] | { error: string | { message: string } }> // These types should be globally available
+  req: NextApiRequest,
+  res: NextApiResponse<Conversation[] | { error: string | { message: string } }>
 ) {
   if (req.method === 'GET') {
     const authHeader = req.headers.authorization;
