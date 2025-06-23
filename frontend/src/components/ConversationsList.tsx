@@ -43,14 +43,14 @@ const ConversationsList: React.FC<ConversationsListProps> = ({ onSelectConversat
   const handleConversationClick = (conversation: Conversation) => {
     // Instead of navigating to a new page for each chat,
     // we can call back to the parent (e.g., a main layout or index page)
-    // to update the ChatWindow with this conversation's details.
+    // to update the ChatWindow with this conversation\'s details.
     // This requires the parent component to manage which conversation is active.
-    // For now, let's assume onSelectConversation will handle loading it into the main chat view.
-    
+    // For now, let\'s assume onSelectConversation will handle loading it into the main chat view.
+
     // If you want to navigate to the main chat page and pass query params:
     // router.push(`/?conversationId=${conversation.id}&threadId=${conversation.openai_thread_id}`);
     // However, a callback is cleaner for SPA-like behavior within the same page structure.
-    onSelectConversation(conversation.id, conversation.openai_thread_id, conversation.title);
+    onSelectConversation(Number(conversation.id), conversation.openai_thread_id, conversation.title); // Convert conversation.id to number
   };
 
 
