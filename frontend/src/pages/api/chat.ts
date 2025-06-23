@@ -78,7 +78,8 @@ export default async function handler(
     }
 
     let currentOpenAIThreadId = existingOpenAIThreadId;
-    let currentConversationDbId: number | null | undefined = existingConversationDbId;
+    // Convert existingConversationDbId to number if it's not null
+    let currentConversationDbId: number | null | undefined = existingConversationDbId !== null ? Number(existingConversationDbId) : null;
 
     // 3. Manage OpenAI Thread & Supabase Conversation Record
     if (!currentOpenAIThreadId && !currentConversationDbId) {
