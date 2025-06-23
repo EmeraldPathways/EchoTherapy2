@@ -1,7 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
 import LoginForm from '@/components/LoginForm';
-import dynamic from 'next/dynamic'; // ADD THIS LINE
+import dynamic from 'next/dynamic'; // ADD THIS LINE for dynamic NavBar
+import Link from "next/link"; // ENSURE THIS LINE IS PRESENT
 
 // Dynamically import NavBar with ssr: false
 const NavBar = dynamic(() => import('@/components/NavBar'), { ssr: false });
