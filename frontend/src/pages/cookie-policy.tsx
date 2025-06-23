@@ -1,7 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import NavBar from '@/components/NavBar';
+import dynamic from 'next/dynamic'; // ADD THIS LINE
+
+// Dynamically import NavBar with ssr: false
+const NavBar = dynamic(() => import('@/components/NavBar'), { ssr: false });
 
 const CookiePolicy: React.FC = () => {
   return (
